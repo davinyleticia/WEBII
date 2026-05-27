@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-between mb-4">
+    <h2>Editar Biografia</h2>
+    <div>
+        <a href="/admin" class="btn btn-secondary">Dashboard</a>
+        <a href="/logout" class="btn btn-danger">Sair</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form action="/admin/sobre/salvar" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Texto da Landing Page</label>
+                <textarea class="form-control" name="biografia" rows="6" required>{{sobre.biografia}}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar Biografia</button>
+        </form>
+    </div>
+</div>

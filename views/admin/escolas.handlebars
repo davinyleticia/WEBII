@@ -1,0 +1,39 @@
+<div class="d-flex justify-content-between mb-4">
+    <h2>Gestão de Escolas</h2>
+    <div>
+        <a href="/admin" class="btn btn-secondary">Dashboard</a>
+        <a href="/logout" class="btn btn-danger">Sair</a>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form action="/admin/escolas/nova" method="POST" class="row g-3">
+            <div class="col-md-5">
+                <input type="text" name="nome" class="form-control" placeholder="Nome da Escola" required>
+            </div>
+            <div class="col-md-5">
+                <input type="text" name="localizacao" class="form-control" placeholder="Localização">
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-striped bg-white shadow-sm">
+    <thead class="table-dark">
+        <tr><th>ID</th><th>Nome</th><th>Localização</th><th>Ação</th></tr>
+    </thead>
+    <tbody>
+        {{#each escolas}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.nome}}</td>
+            <td>{{this.localizacao}}</td>
+            <td><a href="/admin/escolas/deletar/{{this.id}}" class="btn btn-sm btn-outline-danger">Remover</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

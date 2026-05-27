@@ -1,0 +1,75 @@
+<div class="d-flex justify-content-between mb-4">
+    <h2>Materiais de Aula (Blog)</h2>
+    <div>
+        <a href="/admin" class="btn btn-secondary">Dashboard</a>
+        <a href="/logout" class="btn btn-danger">Sair</a>
+    </div>
+</div>
+
+<div class="card mb-4 shadow-sm border-primary">
+    <div class="card-header bg-primary text-white">Publicar Novo Conteúdo / Slide</div>
+    <div class="card-body">
+        <form action="/admin/blog/novo" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label">Título da Aula</label>
+                <input type="text" name="titulo" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Resumo / Descrição da Atividade</label>
+                <textarea name="conteudo" class="form-control" rows="3" required></textarea>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Arquivo de Slide (Apenas PDF)</label>
+                    <input type="file" name="slide_pdf" class="form-control" accept=".pdf">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Imagem de Capa (Opcional)</label>
+                    <input type="file" name="imagem_capa" class="form-control" accept="image/*">
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-success">Publicar Material</button>
+        </form>
+    </div>
+</div>
+
+<table class="table table-striped bg-white shadow-sm align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Data</th>
+            <th>Imagem</th>
+            <th>Título</th>
+            <th>Anexo PDF</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each posts}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.data_publicacao}}</td>
+            <td>
+                {{#if this.imagem_url}}
+                    <img src="{{this.imagem_url}}" alt="Capa" style="width: 60px; height: auto; border-radius: 4px;">
+                {{else}}
+                    <span class="text-muted small">Sem imagem</span>
+                {{/if}}
+            </td>
+            <td>{{this.titulo}}</td>
+            <td>
+                {{#if this.pdf_url}}
+                    <a href="{{this.pdf_url}}" target="_blank" class="btn btn-sm btn-outline-info">Ver Slide</a>
+                {{else}}
+                    <span class="text-muted">Sem anexo</span>
+                {{/if}}
+            </td>
+            <td>
+                <a href="/admin/blog/deletar/{{this.id}}" class="btn btn-sm btn-outline-danger">Remover</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

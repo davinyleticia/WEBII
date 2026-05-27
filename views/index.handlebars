@@ -1,0 +1,114 @@
+<div class="p-5 mb-5 bg-dark text-white rounded-3 shadow">
+    <div class="container-fluid py-4 text-center">
+        <p class="col-md-8 mx-auto fs-5 mt-3 text-light">
+            Bem-vindo(a) à minha página acadêmica. Aqui você encontra informações sobre minha trajetória profissional e
+            as instituições onde atuo.
+        </p>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="row align-items-center justify-content-center">
+        <div class="col-lg-10 text-center">
+            <h2 class="fw-bold text-uppercase mb-4" style="letter-spacing: 2px; color: #333;">Apresentação</h2>
+
+            {{#if sobre}}
+            <p class="lead text-secondary" style="line-height: 1.8; text-align: justify;">
+                {{sobre.biografia}}
+            </p>
+            {{else}}
+            <div class="alert alert-secondary border-0 shadow-sm" role="alert">
+                A biografia ainda não foi cadastrada no sistema. Acesse a área restrita para configurar.
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+<hr class="text-muted my-5">
+
+<div class="container mb-5 pb-4">
+    <div class="text-center mb-5">
+        <h3 class="fw-bold text-uppercase" style="letter-spacing: 2px; color: #333;">Instituições de Ensino</h3>
+        <p class="text-muted">Locais onde leciono e desenvolvo atividades acadêmicas.</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        {{#each escolas}}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm transition-hover"
+                style="border-top: 4px solid #0d6efd !important;">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                            class="bi bi-bank text-primary" viewBox="0 0 16 16">
+                            <path
+                                d="M8 .95 14.61 4h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V7H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 4h.89L8 .95zM3.777 3h8.447L8 1.43 3.777 3zM2 7v7h1V7H2zm2 0v7h2.5V7H4zm3.5 0v7h1V7h-1zm2 0v7H12V7H9.5zM13 7v7h1V7h-1zm2-1V5H1v1h14zm-.39 9H1.39l-.25 1h13.72l-.25-1z" />
+                        </svg>
+                    </div>
+                    <h5 class="card-title fw-bold text-dark">{{this.nome}}</h5>
+
+                    <h6 class="card-subtitle mt-3 text-muted d-flex align-items-center justify-content-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-geo-alt-fill text-danger me-2" viewBox="0 0 16 16">
+                            <path
+                                d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                        </svg>
+                        {{this.localizacao}}
+                    </h6>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="col-12 text-center mt-4">
+            <p class="text-muted fs-5">Nenhuma instituição de ensino cadastrada no momento.</p>
+        </div>
+        {{/each}}
+    </div>
+
+    <hr class="text-muted my-5">
+
+    <div class="container mb-5">
+        <div class="text-center mb-5">
+            <h3 class="fw-bold text-uppercase" style="letter-spacing: 2px; color: #333;">Materiais de Apoio</h3>
+            <p class="text-muted">Últimas aulas, roteiros e slides publicados.</p>
+        </div>
+
+        <div class="row justify-content-center g-4">
+            {{#each posts}}
+            <div class="col-lg-6">
+                <div class="card shadow-sm border-0 h-100 border-start border-4 border-info">
+                    <div class="card-body p-4">
+                        <img src="{{this.imagem_url}}" alt="Capa do Material" class="img-fluid rounded mb-3"
+                            style="max-height: 200px; object-fit: cover; width: 100%;">
+                        <h5 class="fw-bold mb-3">{{this.titulo}}</h5>
+                        <p class="text-muted">{{this.conteudo}}</p>
+
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <small class="text-secondary">Postado em: {{this.data_publicacao}}</small>
+
+                            {{#if this.pdf_url}}
+                            <a href="{{this.pdf_url}}" target="_blank"
+                                class="btn btn-info text-white btn-sm d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-file-earmark-pdf-fill me-2" viewBox="0 0 16 16">
+                                    <path
+                                        d="M5.523 12.424c.14-.082.293-.162.459-.238a7.878 7.878 0 0 1-.45.606c-.28.337-.498.516-.635.572a.266.266 0 0 1-.035.012.282.282 0 0 1-.026-.044c-.056-.11-.054-.216.04-.36.106-.165.319-.354.647-.548zm2.455-1.647c-.119.025-.237.05-.356.078a21.148 21.148 0 0 0 .5-1.05 12.045 12.045 0 0 0 .51.858c-.217.032-.436.07-.654.114zm2.525.939a3.881 3.881 0 0 1-.435-.41c.228.005.434.022.568.068.056.02.096.04.115.05.019.012.033.025.041.045A.118.118 0 0 1 11 11.5c-.026.063-.096.11-.22.144-.075.02-.153.03-.235.027z" />
+                                    <path
+                                        d="M9.202 1.434a4.11 4.11 0 0 1 1.996 1.996L10.5 3h-1.3v-1.566zM11.5 5v1h1V5h-1zm-1-4v1h1c0-.55-.45-1-1-1zm-2-1H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5.5L10.5 1h-2z" />
+                                </svg>
+                                Baixar Slide
+                            </a>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{else}}
+            <div class="col-12 text-center mt-4">
+                <p class="text-muted fs-5">Nenhum material publicado ainda.</p>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

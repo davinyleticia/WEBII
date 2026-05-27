@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-between mb-4">
+    <h2>Gestão de Disciplinas</h2>
+    <div>
+        <a href="/admin" class="btn btn-secondary">Dashboard</a>
+        <a href="/logout" class="btn btn-danger">Sair</a>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form action="/admin/disciplinas/nova" method="POST" class="row g-3">
+            <div class="col-md-4">
+                <input type="text" name="nome" class="form-control" placeholder="Nome da Disciplina" required>
+            </div>
+            <div class="col-md-4">
+                <input type="text" name="descricao" class="form-control" placeholder="Descrição">
+            </div>
+            <div class="col-md-3">
+                <select name="escola_id" class="form-select" required>
+                    <option value="" disabled selected>Selecione a Escola...</option>
+                    {{#each escolas}}
+                        <option value="{{this.id}}">{{this.nome}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary w-100">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-striped bg-white shadow-sm">
+    <thead class="table-dark">
+        <tr><th>ID</th><th>Disciplina</th><th>Descrição</th><th>Escola</th><th>Ação</th></tr>
+    </thead>
+    <tbody>
+        {{#each disciplinas}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.nome}}</td>
+            <td>{{this.descricao}}</td>
+            <td>{{this.escola_nome}}</td>
+            <td><a href="/admin/disciplinas/deletar/{{this.id}}" class="btn btn-sm btn-outline-danger">Remover</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
